@@ -1,8 +1,13 @@
 services:
   - type: web
-    name: chatgpt-line-bot
-    env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python app.py"
+    name: chatgpt-line-supabase
     runtime: python
-    pythonVersion: 3.10
+    buildCommand: |
+      apt-get update && apt-get install -y gcc
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13
+    plan: free
